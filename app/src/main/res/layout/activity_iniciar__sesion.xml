@@ -15,14 +15,15 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="Correo"
+        android:hint="@string/correo"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.255" />
+        app:layout_constraintVertical_bias="0.255"
+        android:importantForAutofill="no" tools:targetApi="o" />
 
     <EditText
         android:id="@+id/et_new_password"
@@ -30,12 +31,12 @@
         android:layout_height="48dp"
         android:layout_marginTop="29dp"
         android:autofillHints=""
-        android:hint="New password"
+        android:hint="@string/new_password"
         android:inputType="textPassword"
         android:textColor="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/correo" />
+        app:layout_constraintTop_toBottomOf="@+id/correo" tools:targetApi="o" />
 
     <Button
         android:id="@+id/login"
@@ -45,7 +46,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="356dp"
-        android:text="Iniciar Sesion"
+        android:text="@string/iniciar_sesion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -55,8 +56,8 @@
 
     <ImageButton
         android:id="@+id/google"
-        android:layout_width="78dp"
-        android:layout_height="47dp"
+        android:layout_width="196dp"
+        android:layout_height="237dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="52dp"
         android:layout_marginBottom="8dp"
@@ -64,7 +65,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login"
         app:layout_constraintVertical_bias="0.086"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        app:srcCompat="@mipmap/ic_launcher_round"
+        android:contentDescription="@string/todo" />
 
     <TextView
         android:id="@+id/textView6"
@@ -74,8 +76,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Iniciar Sesion con Google"
-        android:textSize="20dp"
+        android:text="@string/iniciar_sesion_con_google"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/google"
         app:layout_constraintHorizontal_bias="0.425"
@@ -92,7 +94,8 @@
         app:layout_constraintEnd_toStartOf="@+id/button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@mipmap/ic_launcher"
+        android:contentDescription="@string/todo" />
 
     <Button
         android:id="@+id/button"
@@ -100,7 +103,7 @@
         android:layout_height="46dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="78dp"
-        android:text="Button"
+        android:text="@string/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
@@ -112,7 +115,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="101dp"
-        android:text="Aun no tienes tu cuenta"
+        android:text="@string/aun_no_tienes_tu_cuenta"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -126,7 +129,7 @@
         android:layout_marginStart="144dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="128dp"
-        android:text="Registrate"
+        android:text="@string/registrate"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.318"

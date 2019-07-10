@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Main2Activity">
 
     <TextView
         android:id="@+id/textView5"
@@ -50,10 +50,10 @@
     <Button
         android:id="@+id/button_iniciar"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="191dp"
-        android:layout_height="288dp"
+        android:layout_width="262dp"
+        android:layout_height="53dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="INICIAR"
@@ -63,4 +63,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-</android.support.constraint.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

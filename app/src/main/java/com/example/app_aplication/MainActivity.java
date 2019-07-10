@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button_iniciar:{
-                Intent iniciar_sesion = new Intent(this,Ubicacion.class);
+                Intent iniciar_sesion = new Intent(this,Iniciar_Sesion.class);
                 startActivity(iniciar_sesion);
                 break;
             }

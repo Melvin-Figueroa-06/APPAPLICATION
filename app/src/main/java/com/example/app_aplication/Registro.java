@@ -1,8 +1,8 @@
 package com.example.app_aplication;
 
-import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
 
 public class Registro extends AppCompatActivity {
 

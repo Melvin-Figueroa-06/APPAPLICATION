@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_Inicio"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Inicio" />
+        <item
+            android:id="@+id/nav_Publica"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Publica un anuncio" />
+        <item
+            android:id="@+id/nav_Perfil"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Mi Perfil" />
+        <item
+            android:id="@+id/nav_Categorias"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Categorias" />
+        <item
+            android:id="@+id/nav_Anuncios"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Mis Anuncios" />
+        <item
+            android:id="@+id/nav_Citas"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Mis Citas" />
+        <item
+            android:id="@+id/nav_Favoritos"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Mis Favoritos" />
+        <item
+            android:id="@+id/nav_Ayuda"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Ayuda" />
+        <item
+            android:id="@+id/nav_Ajustes"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Ajustes" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/menu_share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/menu_send" />
+        </menu>
+    </item>
+
+</menu>

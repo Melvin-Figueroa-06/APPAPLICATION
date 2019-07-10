@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="Iniciar_sesion" type="id" />
+    <item name="button" type="id" />
+    <item name="action_settings" type="id" />
 </resources>

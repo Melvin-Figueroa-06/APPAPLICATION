@@ -18,14 +18,30 @@
     <string name="correo" />
     <string name="title_activity_app">App</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
 
     <string name="facebook_application_id" translatable="false">361772634397738</string>
     <string name="facebook_login_protocol_scheme" translatable="false">361772634397738</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="title_activity_publicacion">Publicacion</string>
+    <string name="actividad_1" />
+    <string name="actividad_2" />
+    <string name="actividad_4" />
+    <string name="actividad_3" />
+    <string name="title_activity_categorias">Categorias</string>
+    <string name="title_activity_anuncios">Anuncios</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="title_activity_ayuda">Ayuda</string>
+    <string name="title_activity_anuncio">AnuncioActivity</string>
+    <string name="Favoritos" />
+    <string name="Citas" />
+    <string name="Anuncios" />
+    <string name="title_activity_tabbed">Tabbed</string>
+    <string name="tab_text_3" />
 
 </resources>

@@ -15,10 +15,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Favoritos"></activity>
+        <activity android:name=".Citas" />
+        <activity
+            android:name=".Anuncios"
+            android:label="@string/title_activity_anuncios"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Tabbed"
+            android:label="@string/title_activity_tabbed"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AnuncioActivity"
+            android:label="@string/title_activity_anuncio"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Ayuda"
+            android:label="@string/title_activity_ayuda"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Categorias"
+            android:label="@string/title_activity_categorias"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Perfil" />
+        <activity android:name=".Inicio" />
+        <activity android:name=".Ajustes" />
+        <activity
+            android:name=".Publicacion"
+            android:label="@string/title_activity_publicacion"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MenuActivity" />
         <activity
             android:name=".App"
             android:label="@string/title_activity_app"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Registro" />
         <activity android:name=".Iniciar_Sesion" />
         <!--

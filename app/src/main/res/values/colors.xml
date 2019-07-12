@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#FFFF6F00</color>
     <color name="colorAccent">#FFFF6F00</color>
     <color name="colorDarkGrey">#FFFF6F00</color>
+    <color name="dividerColor">#80CBC4</color>
+    <color name="list_item_title">#AAAAAA</color>
+    <color name="list_group_title">#808080</color>
 </resources>

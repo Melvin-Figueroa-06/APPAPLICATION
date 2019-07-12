@@ -12,8 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -26,11 +24,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-
-import java.util.Arrays;
-import java.util.List;
 
 import dmax.dialog.SpotsDialog;
 
@@ -80,7 +74,7 @@ public class Iniciar_Sesion extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         //Start new activity and pass email to new activity
-                        Intent intent = new Intent(Iniciar_Sesion.this,App.class);
+                        Intent intent = new Intent(Iniciar_Sesion.this,MenuActivity.class);
                         intent.putExtra("email", authResult.getUser().getEmail());
                         startActivity(intent);
                     }

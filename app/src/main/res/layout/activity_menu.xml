@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="405dp"
+        android:layout_height="427dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/inicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Inicio" />
+
+            <Button
+                android:id="@+id/publicacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Publica un Anuncio" />
+
+            <Button
+                android:id="@+id/perfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mi perfil" />
+
+            <Button
+                android:id="@+id/citas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mis Citas" />
+
+            <Button
+                android:id="@+id/favoritos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mis Favoritos" />
+
+            <Button
+                android:id="@+id/categorias"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Categorias" />
+
+            <Button
+                android:id="@+id/anuncios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mis Anuncios" />
+
+            <Button
+                android:id="@+id/ayuda"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ayuda" />
+
+            <Button
+                android:id="@+id/ajustes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ajustes" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,4 +3,6 @@
     <item name="Iniciar_sesion" type="id" />
     <item name="button" type="id" />
     <item name="action_settings" type="id" />
+    <item name="contenedorFragment" type="id" />
+    <item name="txt_email" type="id" />
 </resources>

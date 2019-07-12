@@ -1,14 +1,14 @@
 package com.example.app_aplication;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.app_aplication.ui.main.PlaceholderFragment;
-import com.example.app_aplication.ui.main.SectionsPagerAdapter;
 
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -100,6 +100,23 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
         }
+    }
+
+    private Boolean checkPermission(String permisso){
+        if (Build.VERSION.SDK_INT  >= Build.VERSION_CODES.M){
+            Integer result = this.checkSelfPermission(permisso);
+            return result == PackageManager.PERMISSION_GRANTED;
+        }
+        return false;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    private  void startCallPhone(){
+
     }
 }
 

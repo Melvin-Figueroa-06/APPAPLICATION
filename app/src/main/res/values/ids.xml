@@ -5,4 +5,7 @@
     <item name="action_settings" type="id" />
     <item name="contenedorFragment" type="id" />
     <item name="txt_email" type="id" />
+    <item name="set_picture" type="id" />
+    <item name="show_options_button" type="id" />
+    <item name="rl_view" type="id" />
 </resources>

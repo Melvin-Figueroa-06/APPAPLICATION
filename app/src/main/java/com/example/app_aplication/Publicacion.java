@@ -1,30 +1,36 @@
 package com.example.app_aplication;
 
+import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.PersistableBundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
+
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.Manifest.permission_group.CAMERA;
 
 public class Publicacion extends AppCompatActivity {
 
@@ -46,22 +52,14 @@ public class Publicacion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publicacion);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+
         //CAMERA
         mSetImage = (ImageView) findViewById(R.id.set_picture);
         mOptionButton = (Button) findViewById(R.id.show_options_button);
         mRlView = (RelativeLayout) findViewById(R.id.rl_view);
-/*
+
         if (mayRequestStoragePermission())
             mOptionButton.setEnabled(true);
         else
@@ -73,11 +71,11 @@ public class Publicacion extends AppCompatActivity {
                 showOptions();
             }
         });
-*/
+
     }
 
     //PERMISOS PARA LA CAMARA
- /*   private boolean mayRequestStoragePermission() {
+   private boolean mayRequestStoragePermission() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
             return true;
 
@@ -88,7 +86,8 @@ public class Publicacion extends AppCompatActivity {
         if ((shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) || (shouldShowRequestPermissionRationale(CAMERA))){
             Snackbar.make(mRlView, "Los Permisos son Necesarios",
                     Snackbar.LENGTH_INDEFINITE).setAction(android.R.string.ok, new View.OnClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.M)
+
+                @TargetApi(Build.VERSION_CODES.M)
                 @Override
                 public void onClick(View v) {
                     requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, CAMERA}, MY_PERMISSIONS);
@@ -99,7 +98,7 @@ public class Publicacion extends AppCompatActivity {
         }
         return false;
     }
-*/
+
 
 
     private void showOptions() {
@@ -113,8 +112,8 @@ public class Publicacion extends AppCompatActivity {
                     openCamera();
                 }
                 else if (option[which] == "Elegir la galeria"){
-                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    intent.setType("images/*");
+                    Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intent.setType("image/*");
                     startActivityForResult(intent.createChooser(intent, "Selecionar app de imagen"), SELECT_PICTURE);
                 }else  {
                     dialog.dismiss();
@@ -128,14 +127,14 @@ public class Publicacion extends AppCompatActivity {
         File file = new File(Environment.getExternalStorageDirectory(), MEDIA_DIRECTORY);
         boolean isDirectoryCreated = file.exists();
         //creacion de un directorio para guardar
-        if (isDirectoryCreated)
+        if (!isDirectoryCreated)
             isDirectoryCreated = file.mkdirs();
         //para no repetir los nombres de las images
         if (isDirectoryCreated){
             Long timestamp = System.currentTimeMillis() / 1000;
             String imageName = timestamp.toString() + ".jpg";
 
-            mPath = Environment.getExternalStorageState() + File.separator + MEDIA_DIRECTORY
+            mPath = Environment.getExternalStorageDirectory() + File.separator + MEDIA_DIRECTORY
                     + File.separator + imageName;
 
             File newFile = new File(mPath);
@@ -147,8 +146,8 @@ public class Publicacion extends AppCompatActivity {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
         outState.putString("file_path", mPath);
     }
 
@@ -184,7 +183,7 @@ public class Publicacion extends AppCompatActivity {
         }
 
     }
-/*
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -220,5 +219,5 @@ public class Publicacion extends AppCompatActivity {
             }
         });
         builder.show();
-    }*/
+    }
 }

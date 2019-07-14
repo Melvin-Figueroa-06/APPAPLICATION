@@ -136,7 +136,7 @@ public class Iniciar_Sesion extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(Iniciar_Sesion.this, Registro.class);
+        Intent intent = new Intent(Iniciar_Sesion.this, Registrandose.class);
         startActivity(intent);
     }
 

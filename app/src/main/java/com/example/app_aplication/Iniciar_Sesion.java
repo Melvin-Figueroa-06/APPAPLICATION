@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.app_aplication.Utils.Data;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -25,11 +27,21 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
 import dmax.dialog.SpotsDialog;
 
 public class Iniciar_Sesion extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
+
+    EditText emailEdit, passwordEdit;
+    Button loginButton, registerButton;
 
     private static final int PERMISSION_SIGN_IN = 9999; // Any integer value you want
     GoogleApiClient mGoogleApiClient;
@@ -91,7 +103,6 @@ public class Iniciar_Sesion extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_iniciar__sesion);
 
-
         loadComponents();
 
         configureGoogleSignIn();
@@ -112,6 +123,18 @@ public class Iniciar_Sesion extends AppCompatActivity implements View.OnClickLis
                 .build();
     }
 
+    private void loadComponents() {
+
+        emailEdit = findViewById(R.id.email);
+        passwordEdit = findViewById(R.id.password);
+
+        loginButton = findViewById(R.id.login);
+        registerButton = findViewById(R.id.registrarse);
+
+        loginButton.setOnClickListener(this);
+        registerButton.setOnClickListener(this);
+    }
+
     private void signIn() {
         Intent intent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(intent, PERMISSION_SIGN_IN);
@@ -129,15 +152,63 @@ public class Iniciar_Sesion extends AppCompatActivity implements View.OnClickLis
         mGoogleApiClient.connect();
     }
 
-    private void loadComponents() {
-        Button button_iniciar = findViewById(R.id.registrarse);
-        button_iniciar.setOnClickListener(this);
+
+
+    private void login() {
+
+        //controlar no vacios
+        String email = emailEdit.getText().toString();
+        String password = passwordEdit.getText().toString();
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        params.put("email", email);
+        params.put("password", password);
+
+        client.post(Data.LOGIN_SERVICE, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                try {
+                    if (response.getString("message") != null){
+                        Toast.makeText(Iniciar_Sesion.this, "Acceso Correcto", Toast.LENGTH_SHORT).show();
+                        Data.TOKEN = response.getString("token");
+                        Data.ID_USER = response.getString("idUser");
+
+                        if (response.getString("tipo").equals("comprador")){
+                            Toast.makeText(Iniciar_Sesion.this, response.getString("tipo") + 1 , Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(Iniciar_Sesion.this, DrawerActivity.class);
+                            startActivity(intent);
+                        }else {
+                            Toast.makeText(Iniciar_Sesion.this, response.getString("tipo") + 2 , Toast.LENGTH_SHORT).show();
+
+                            Intent intent = new Intent(Iniciar_Sesion.this, Drawer2Activity.class);
+                            startActivity(intent);
+                        }
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
+
+
+    }
+    private void register() {
+        Intent registerIntent = new Intent(this, Registrandose.class);
+        startActivity(registerIntent);
     }
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(Iniciar_Sesion.this, Registrandose.class);
-        startActivity(intent);
+        if (v.getId() == R.id.login){
+            login();
+        }else{
+            register();
+        }
     }
 
     @Override

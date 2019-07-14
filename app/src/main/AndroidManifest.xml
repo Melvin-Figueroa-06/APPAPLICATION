@@ -22,9 +22,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Drawer2Activity"
+            android:label="@string/title_activity_drawer2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".Registrandose"
             android:label="@string/title_activity_registrandose"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".DrawerActivity"
             android:label="@string/title_activity_drawer"

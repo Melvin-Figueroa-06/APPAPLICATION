@@ -5,41 +5,43 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_Inicio"
+            android:id="@+id/inicio"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Inicio" />
+            android:title="@string/menu_home" />
+
         <item
-            android:id="@+id/nav_Publica"
+            android:id="@+id/publica"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Publica un anuncio" />
         <item
-            android:id="@+id/nav_Perfil"
+            android:id="@+id/perfil"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Mi Perfil" />
         <item
-            android:id="@+id/nav_Categorias"
+            android:id="@+id/categorias"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Categorias" />
         <item
-            android:id="@+id/nav_Anuncios"
+            android:id="@+id/anuncios"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Mis Anuncios" />
         <item
-            android:id="@+id/nav_Citas"
+            android:id="@+id/citas"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Mis Citas" />
         <item
-            android:id="@+id/nav_Favoritos"
+            android:id="@+id/favoritos"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Mis Favoritos" />
         <item
-            android:id="@+id/nav_Ayuda"
+            android:id="@+id/ayuda"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Ayuda" />
         <item
-            android:id="@+id/nav_Ajustes"
+            android:id="@+id/ajustes"
             android:icon="@drawable/ic_menu_manage"
             android:title="Ajustes" />
+
     </group>
 
 

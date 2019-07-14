@@ -43,5 +43,14 @@
     <string name="Anuncios" />
     <string name="title_activity_tabbed">Tabbed</string>
     <string name="tab_text_3" />
+    <string name="title_activity_menu">Menu</string>
+
+    <string name="menu_home">Inicio</string>
+    <string name="menu_gallery">Login</string>
+    <string name="menu_slideshow">Categorias</string>
+    <string name="menu_tools">Categorias</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="title_activity_drawer">DrawerActivity</string>
 
 </resources>

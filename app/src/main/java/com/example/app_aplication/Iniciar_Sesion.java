@@ -74,7 +74,7 @@ public class Iniciar_Sesion extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         //Start new activity and pass email to new activity
-                        Intent intent = new Intent(Iniciar_Sesion.this,MenuActivity.class);
+                        Intent intent = new Intent(Iniciar_Sesion.this,DrawerActivity.class);
                         intent.putExtra("email", authResult.getUser().getEmail());
                         startActivity(intent);
                     }

@@ -84,11 +84,8 @@ public class Registrandose extends AppCompatActivity{
                 super.onFailure(statusCode, headers, throwable, errorResponse);
             }
 
-
-
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
 
                 if (response.has("roles")){
                     Toast.makeText(Registrandose.this,"Usuario Registrado", Toast.LENGTH_LONG).show();

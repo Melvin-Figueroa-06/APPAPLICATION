@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -157,24 +158,40 @@ public class Iniciar_Sesion extends AppCompatActivity implements View.OnClickLis
     private void login() {
 
         //controlar no vacios
-        String email = emailEdit.getText().toString();
-        String password = passwordEdit.getText().toString();
+        final EditText emails = findViewById(R.id.email);
+        final EditText passwords = findViewById(R.id.password);
+        final TextView welcome = findViewById(R.id.welcome);
+        welcome.setVisibility(View.GONE);
 
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
-        params.put("email", email);
-        params.put("password", password);
+        params.add("email", emails.getText().toString());
+        params.add("password", passwords.getText().toString());
 
         client.post(Data.LOGIN_SERVICE, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
+            if (response.has("token")){
                 try {
+                    Data.TOKEN = response.getString("token");
+                    Toast.makeText(Iniciar_Sesion.this,"Usuario Logueado con Exito",Toast.LENGTH_LONG).show();
+                    welcome.setVisibility(View.VISIBLE);
+                    welcome.setText("BIEN VENIDO AHORA PUEDES COMPRAR Y VENDER" + emails.getText());
+                    emails.setVisibility(View.GONE);
+                    passwords.setVisibility(View.GONE);
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+
+                /*try {
                     if (response.getString("message") != null){
                         Toast.makeText(Iniciar_Sesion.this, "Acceso Correcto", Toast.LENGTH_SHORT).show();
                         Data.TOKEN = response.getString("token");
                         Data.ID_USER = response.getString("idUser");
-
+                        Intent intent = new Intent(Iniciar_Sesion. this, DrawerActivity.class);
+                        startActivity(intent);
+               */         /*
                         if (response.getString("tipo").equals("comprador")){
                             Toast.makeText(Iniciar_Sesion.this, response.getString("tipo") + 1 , Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(Iniciar_Sesion.this, DrawerActivity.class);
@@ -189,7 +206,7 @@ public class Iniciar_Sesion extends AppCompatActivity implements View.OnClickLis
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                }*/
 
 
             }

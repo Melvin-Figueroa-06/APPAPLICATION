@@ -9,4 +9,7 @@
     tools:context=".Categorias"
     tools:showIn="@layout/activity_categorias">
 
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

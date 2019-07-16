@@ -157,6 +157,15 @@ public class Iniciar_Sesion extends AppCompatActivity implements View.OnClickLis
 
     private void login() {
 
+
+        TextView correo  = findViewById(R.id.email);
+        TextView password  = findViewById(R.id.password);
+        if (correo.getText().toString().equals(" ")  || password.getText().toString().equals("")){
+            Toast.makeText(this,"Es necesario llenar los dos campos",Toast.LENGTH_SHORT).show();
+            return;
+
+        }
+
         //controlar no vacios
         final EditText emails = findViewById(R.id.email);
         final EditText passwords = findViewById(R.id.password);
@@ -186,6 +195,8 @@ public class Iniciar_Sesion extends AppCompatActivity implements View.OnClickLis
 
             }
         });
+
+
 
 
     }

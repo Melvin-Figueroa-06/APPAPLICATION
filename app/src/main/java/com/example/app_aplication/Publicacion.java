@@ -1,39 +1,54 @@
 package com.example.app_aplication;
 
-import android.annotation.TargetApi;
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
+import com.example.app_aplication.Utils.Data;
 import com.google.android.material.snackbar.Snackbar;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-import static android.Manifest.permission_group.CAMERA;
+import cz.msebera.android.httpclient.Header;
 
-public class Publicacion extends AppCompatActivity {
+public class Publicacion extends AppCompatActivity implements View.OnClickListener{
 
+    EditText descripcionEdit, precioEdit, stockEdit;
+    Spinner estadoSpinner, categoriaSpinner;
+    ImageView imageView;
+    Button btnCamera, btnPublicar;
+
+    String estado,categoria;
+
+    ArrayList<String> ESTADO, CATEGORIA;
     private static String APP_DIRECTORY = "MyPictureApp/";   //para guardar la photo
     private static String MEDIA_DIRECTORY = APP_DIRECTORY + "PictureApp";  //para guardar la photo
 
@@ -52,9 +67,11 @@ public class Publicacion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publicacion);
+        loadComponents();
+        setSpinner();
+        //Methods.validarPermisos(this,this);
 
-
-
+        /*
         //CAMERA
         mSetImage = (ImageView) findViewById(R.id.set_picture);
         mOptionButton = (Button) findViewById(R.id.show_options_button);
@@ -70,154 +87,219 @@ public class Publicacion extends AppCompatActivity {
             public void onClick(View v) {
                 showOptions();
             }
+        });*/
+
+    }
+
+    private void setSpinner() {
+
+
+        ESTADO = new ArrayList<>();
+        ESTADO.add("DISPONIBLE");
+        ESTADO.add("AGOTADO");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ESTADO);
+        Spinner spinner = findViewById(R.id.spinner_estado);
+        spinner.setAdapter(adapter);
+    }
+
+    @SuppressLint("WrongViewCast")
+    private void loadComponents() {
+        descripcionEdit = findViewById(R.id.descripcionEdit);
+        precioEdit = findViewById(R.id.precio);
+        stockEdit = findViewById(R.id.stock);
+
+        estadoSpinner = findViewById(R.id.spinner_categoria);
+        categoriaSpinner = findViewById(R.id.spinner_estado);
+
+        estadoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                estado = parent.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        categoriaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                categoria = parent.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
         });
 
+        imageView = findViewById(R.id.imageView);
+
+        btnCamera = findViewById(R.id.show_options_button);
+        btnPublicar = findViewById(R.id.btnPublicar);
+        btnCamera.setOnClickListener(this);
+
+        btnPublicar.setOnClickListener(this);
+
     }
 
-    //PERMISOS PARA LA CAMARA
-   private boolean mayRequestStoragePermission() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
-            return true;
 
-        if ((checkSelfPermission(WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) &&
-                (checkSelfPermission(CAMERA) == PackageManager.PERMISSION_GRANTED))
-            return true;
+    private void sendData() {
 
-        if ((shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) || (shouldShowRequestPermissionRationale(CAMERA))){
-            Snackbar.make(mRlView, "Los Permisos son Necesarios",
-                    Snackbar.LENGTH_INDEFINITE).setAction(android.R.string.ok, new View.OnClickListener() {
+        /*if (descripcionEdit.getText().toString().isEmpty() || precioEdit.getText().toString().isEmpty()  || stockEdit.getText().toString().isEmpty()|| estadoSpinner.getText().toString().isEmpty()){
+            Toast.makeText(this, "Los campos no pueden estar vacios", Toast.LENGTH_SHORT).show();
+            return;
+        }*/
 
-                @TargetApi(Build.VERSION_CODES.M)
-                @Override
-                public void onClick(View v) {
-                    requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, CAMERA}, MY_PERMISSIONS);
-                }
-            }).show();
-        }else  {
-            requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, CAMERA}, MY_PERMISSIONS);
+        if (path == null || path == ""){
+            Toast.makeText(this, "seleccionar una imagen", Toast.LENGTH_SHORT).show();
+            return;
         }
-        return false;
-    }
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+
+        File file = new File(path);
+        try {
+            params.put("foto", file,"image/jpeg");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        params.put("descripcion", descripcionEdit.getText());
+        params.put("precio", precioEdit.getText());
+        params.put("stock", stockEdit.getText());
+        params.put("estado", estado);
+        params.put("categoria", categoria);
 
 
 
-    private void showOptions() {
-        final CharSequence[] option = {"Tomar foto", "Elegir Galeria", "Cancelar"};
-        final AlertDialog.Builder builder = new AlertDialog.Builder(Publicacion.this);
-        builder.setTitle("Elegir una opcion");
-        builder.setItems(option, new DialogInterface.OnClickListener() {
+
+        client.post(Data.REGISTER_PUBLICACION,params,new JsonHttpResponseHandler(){
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (option [which] == "Tomar Foto"){
-                    openCamera();
+            public void onSuccess(int statusCode, Header[] headers, JSONObject resp) {
+                try {
+
+
+                    if (resp.getString("message") != null) {
+                        Toast.makeText(Publicacion.this, resp.getString("message"), Toast.LENGTH_LONG).show();
+                        path = "";
+                        descripcionEdit.getText().clear();
+                        precioEdit.getText().clear();
+                        stockEdit.getText().clear();
+
+                        Publicacion.this.finish();
+
+                    } else {
+                        Toast.makeText(Publicacion.this, "ERROR", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                else if (option[which] == "Elegir la galeria"){
-                    Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    intent.setType("image/*");
-                    startActivityForResult(intent.createChooser(intent, "Selecionar app de imagen"), SELECT_PICTURE);
-                }else  {
-                    dialog.dismiss();
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Toast.makeText(Publicacion.this, responseString, Toast.LENGTH_LONG).show();
+                Log.d("message",responseString);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                try {
+                    Toast.makeText(Publicacion.this, errorResponse.getString("error"), Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
         });
-        builder.show();
+
     }
 
-    private void openCamera() {
-        File file = new File(Environment.getExternalStorageDirectory(), MEDIA_DIRECTORY);
-        boolean isDirectoryCreated = file.exists();
-        //creacion de un directorio para guardar
-        if (!isDirectoryCreated)
-            isDirectoryCreated = file.mkdirs();
-        //para no repetir los nombres de las images
-        if (isDirectoryCreated){
-            Long timestamp = System.currentTimeMillis() / 1000;
-            String imageName = timestamp.toString() + ".jpg";
 
-            mPath = Environment.getExternalStorageDirectory() + File.separator + MEDIA_DIRECTORY
-                    + File.separator + imageName;
-
-            File newFile = new File(mPath);
-
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
-            startActivityForResult(intent, PHOTO_CODE);
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.btnPublicar){
+            sendData();
+        }
+        if (v.getId() == R.id.show_options_button){
+            Snackbar.make(v,"Message",Snackbar.LENGTH_LONG).show();
+            cargarImagen();
         }
     }
+    //CAMERA
+    final int COD_GALERIA=100;
+    final int COD_CAMERA=200;
+    String path;
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("file_path", mPath);
+    private void cargarImagen() {
+
+        final CharSequence[] opciones={"Tomar Foto","Cargar Imagen","Cancelar"};
+        final AlertDialog.Builder alertOpciones=new AlertDialog.Builder(Publicacion.this);
+        alertOpciones.setTitle("Seleccione una Opción");
+        alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (opciones[i].equals("Tomar Foto")){
+                    tomarFotografia();
+                }else{
+                    if (opciones[i].equals("Cargar Imagen")){
+                        Intent intent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        intent.setType("image/*");
+                        startActivityForResult(intent.createChooser(intent,"Seleccione la Aplicación"),COD_GALERIA);
+                    }else{
+                        dialogInterface.dismiss();
+                    }
+                }
+            }
+        });
+        alertOpciones.show();
+
+    }
+    private void tomarFotografia() {
+
+        Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Methods.FileAndPath fileAndPath= Methods.createFile(path);
+        File file = fileAndPath.getFile();
+        path = fileAndPath.getPath();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Uri fileuri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", file);
+
+            camera.putExtra(MediaStore.EXTRA_OUTPUT, fileuri);
+            //BuildConfig.APPLICATION_ID + ".provider"
+        } else {
+            camera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+        }
+        startActivityForResult(camera, COD_CAMERA);
     }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        mPath = savedInstanceState.getString("file_path");
-    }
+
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if (resultCode==RESULT_OK){
             switch (requestCode){
-            case PHOTO_CODE:
-                MediaScannerConnection.scanFile(this, new String[]{mPath}, null,
-                        new MediaScannerConnection.OnScanCompletedListener() {
-                            @Override
-                            public void onScanCompleted(String path, Uri uri) {
-                                Log.i("ExternalStorage", "Scanned" + path + ":");
-                                Log.i("EXTERNALSTORAGE", "-> Uri =" + uri);
-                            }
-                        });
-                Bitmap bitmap = BitmapFactory.decodeFile(mPath);
-                mSetImage.setImageBitmap(bitmap);
-                break;
-                case SELECT_PICTURE:
-                    Uri path = data.getData();
-                    mSetImage.setImageURI(path);
+                case COD_GALERIA:
+                    Uri imgPath=data.getData();
+                    imageView.setImageURI(imgPath);
+                    path = Methods.getRealPathFromURI(this,imgPath);
+                    Toast.makeText(Publicacion.this, path, Toast.LENGTH_SHORT).show();
+                    break;
+                case COD_CAMERA:
+                    loadImageCamera();
+
+
                     break;
             }
         }
-
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == MY_PERMISSIONS){
-            if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(Publicacion.this, "Permisos Aceptados", Toast.LENGTH_SHORT).show();
-                mOptionButton.setEnabled(true);
-            }
-        }else {
-            showExplanation();
+    private void loadImageCamera() {
+        Bitmap img = BitmapFactory.decodeFile(path);
+        if(img != null) {
+            imageView.setImageBitmap(img);
+
         }
-    }
-
-    private void showExplanation() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Publicacion.this);
-        builder.setTitle("Permisos Denegados");
-        builder.setMessage("Para user la camara necesitas aceptar los permisos");
-        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent();
-                intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                intent.setData(uri);
-                startActivity(intent);
-            }
-        });
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                finish();
-            }
-        });
-        builder.show();
     }
 }

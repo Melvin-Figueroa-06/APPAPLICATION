@@ -57,7 +57,7 @@ public class MyAdapter  extends BaseAdapter {
         estado.setText(this.LIST.get(position).getEstado());
         categoria.setText(this.LIST.get(position).getCategoria());
         precio.setText(this.LIST.get(position).getPrecio());
-        image.setImageBitmap(this.LIST.get(position).getImage());
+       // image.setImageBitmap(this.LIST.get(position).getImage());
 
 
         /*image.setOnClickListener(new View.OnClickListener() {

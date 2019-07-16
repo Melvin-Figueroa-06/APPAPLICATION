@@ -1,5 +1,6 @@
 package com.example.app_aplication;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.Editable;
@@ -51,6 +52,8 @@ public class Inicio extends AppCompatActivity {
         LISTINFO = new ArrayList<ItemList>();
     }
 
+
+
     private void loadDAta(String keystr) {
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(Data.PUBLICADO_SERVICE + Data.ID_PUBLICACION, new JsonHttpResponseHandler(){
@@ -88,11 +91,12 @@ public class Inicio extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("WrongViewCast")
     private void loadComponents() {
 
 
 
-        LIST = findViewById(R.id.listView);
+        LIST = findViewById(R.id.listview);
         ADAPTER = new MyAdapter(this, LISTINFO);
 
         EditText search = (EditText)this.findViewById(R.id.search);
@@ -115,7 +119,7 @@ public class Inicio extends AppCompatActivity {
             }
         });
 
-        LIST .setAdapter(ADAPTER);
+//        LIST .setAdapter(ADAPTER);
 
         ListView list = findViewById(R.id.listView);
         ArrayList<String> datoslist = new ArrayList<>();

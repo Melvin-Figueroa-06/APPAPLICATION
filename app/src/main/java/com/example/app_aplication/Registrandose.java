@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -61,6 +62,16 @@ public class Registrandose extends AppCompatActivity{
 
 
     private void sendData() {
+
+        TextView correo  = findViewById(R.id.email);
+        TextView password  = findViewById(R.id.password);
+        if (correo.getText().toString().equals(" ")  || password.getText().toString().equals("")){
+            Toast.makeText(this,"Es necesario llenar los  campos",Toast.LENGTH_SHORT).show();
+            return;
+
+        }
+
+
 
         EditText names = findViewById(R.id.name);
         EditText emails = findViewById(R.id.email);

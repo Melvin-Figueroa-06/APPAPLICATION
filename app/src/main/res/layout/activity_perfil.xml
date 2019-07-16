@@ -15,6 +15,7 @@
         android:layout_marginEnd="59dp"
         android:text="Corrreo"
         android:textAlignment="center"
+        android:textColor="#FF5722"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,25 +32,11 @@
         android:inputType="textPersonName"
         android:text="Nombre"
         android:textAlignment="center"
+        android:textColor="#FF5722"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/avatarImage" />
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="73dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="73dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="PERFIL DE USUARIO"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tipoText"
@@ -60,6 +47,7 @@
         android:layout_marginEnd="8dp"
         android:text="Tipo usuario"
         android:textAlignment="center"
+        android:textColor="#FF5722"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/correoText" />
@@ -68,11 +56,11 @@
         android:id="@+id/avatarImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="57dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
         app:srcCompat="@android:drawable/sym_def_app_icon" />
 
     <Button
@@ -81,9 +69,26 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="61dp"
         android:text="Guardar"
+        android:textColor="#FF5722"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tipoText" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="57dp"
+        android:text="PERFIL DE USUARIO"
+        android:textColor="#FF5722"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/avatarImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

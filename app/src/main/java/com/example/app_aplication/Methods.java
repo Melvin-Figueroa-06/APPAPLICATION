@@ -54,13 +54,13 @@ public  class Methods {
     }
 
     public static FileAndPath createFile(String path) {
-        //Logica de creado
+        //creacion
         File file = new File(Environment.getExternalStorageDirectory(), Environment.DIRECTORY_PICTURES);
         if (!file.exists()) {
             file.mkdirs();
         }
 
-        //generar nombre
+        //generando nombre
         String name = "";
         if (file.exists()) {
             name = "IMG_" + System.currentTimeMillis() / 1000 + ".jpg";
@@ -69,7 +69,7 @@ public  class Methods {
         File fileimg = new File(path);
         return new FileAndPath(fileimg,path);
     }
-    //recuperar la url a partir de la imagen
+    //recuperar la url de la imagen
     public static String getRealPathFromURI(Context context, Uri contentURI) {
         String result = null;
         Cursor cursor = context.getContentResolver().query(contentURI,

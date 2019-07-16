@@ -86,8 +86,8 @@ public class DrawerActivity extends AppCompatActivity
                 startActivity(inicio);
                 break;
             }
-            case R.id.publica:{
-                Intent publica = new Intent(this, Publicacion.class);
+            case R.id.publicado:{
+                Intent publica = new Intent(this, Publicando.class);
                 startActivity(publica);
                 break;
             }

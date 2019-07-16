@@ -38,7 +38,7 @@ public class Perfil extends AppCompatActivity {
 
     private void getData() {
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(Data. USERS + Data.TOKEN,new JsonHttpResponseHandler(){
+        client.get(Data.USERS + Data.ID_USER,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
@@ -100,7 +100,7 @@ public class Perfil extends AppCompatActivity {
         }
         params.put("name",nombre);
 
-        client.patch(Data.USERS + Data.TOKEN,params,new JsonHttpResponseHandler(){
+        client.patch(Data.REGISTER_SERVICE + Data.ID_USER,params,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {

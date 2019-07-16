@@ -1,6 +1,6 @@
 package com.example.app_aplication;
 
-import android.annotation.SuppressLint;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,11 +12,9 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -35,81 +33,36 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-public class Publicacion extends AppCompatActivity implements View.OnClickListener{
+public class Publicando extends AppCompatActivity implements View.OnClickListener{
 
-    EditText descripcionEdit, precioEdit, stockEdit;
+    EditText descripcionEdit, precioEdit, stockEdit, name;
     Spinner estadoSpinner, categoriaSpinner;
     ImageView imageView;
     Button btnCamera, btnPublicar;
 
     String estado,categoria;
 
-    ArrayList<String> ESTADO, CATEGORIA;
-    private static String APP_DIRECTORY = "MyPictureApp/";   //para guardar la photo
-    private static String MEDIA_DIRECTORY = APP_DIRECTORY + "PictureApp";  //para guardar la photo
-
-    private final int MY_PERMISSIONS = 100;
-    private final int PHOTO_CODE = 200;
-    private final int SELECT_PICTURE = 300;
-
-    private ImageView mSetImage;
-    private Button mOptionButton;
-    private RelativeLayout mRlView;
-
-    private String mPath;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_publicacion);
+        setContentView(R.layout.activity_publicando);
         loadComponents();
-        setSpinner();
-        //Methods.validarPermisos(this,this);
 
-        /*
-        //CAMERA
-        mSetImage = (ImageView) findViewById(R.id.set_picture);
-        mOptionButton = (Button) findViewById(R.id.show_options_button);
-        mRlView = (RelativeLayout) findViewById(R.id.rl_view);
 
-        if (mayRequestStoragePermission())
-            mOptionButton.setEnabled(true);
-        else
-            mOptionButton.setEnabled(false);
-
-        mOptionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showOptions();
-            }
-        });*/
+        Methods.validarPermisos(this,this);
 
     }
 
-    private void setSpinner() {
-
-
-        ESTADO = new ArrayList<>();
-        ESTADO.add("DISPONIBLE");
-        ESTADO.add("AGOTADO");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ESTADO);
-        Spinner spinner = findViewById(R.id.spinner_estado);
-        spinner.setAdapter(adapter);
-    }
-
-    @SuppressLint("WrongViewCast")
     private void loadComponents() {
         descripcionEdit = findViewById(R.id.descripcionEdit);
-        precioEdit = findViewById(R.id.precio);
-        stockEdit = findViewById(R.id.stock);
-
-        estadoSpinner = findViewById(R.id.spinner_categoria);
-        categoriaSpinner = findViewById(R.id.spinner_estado);
+        precioEdit = findViewById(R.id.precioEdit);
+        stockEdit = findViewById(R.id.stockEdit);
+        name = findViewById(R.id.name);
+        estadoSpinner = findViewById(R.id.estadoSpinner);
+        categoriaSpinner = findViewById(R.id.categoriaSpinner);
 
         estadoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -134,7 +87,7 @@ public class Publicacion extends AppCompatActivity implements View.OnClickListen
 
         imageView = findViewById(R.id.imageView);
 
-        btnCamera = findViewById(R.id.show_options_button);
+        btnCamera = findViewById(R.id.btnCamera);
         btnPublicar = findViewById(R.id.btnPublicar);
         btnCamera.setOnClickListener(this);
 
@@ -145,13 +98,13 @@ public class Publicacion extends AppCompatActivity implements View.OnClickListen
 
     private void sendData() {
 
-        /*if (descripcionEdit.getText().toString().isEmpty() || precioEdit.getText().toString().isEmpty()  || stockEdit.getText().toString().isEmpty()|| estadoSpinner.getText().toString().isEmpty()){
+        if (descripcionEdit.getText().toString().isEmpty() || precioEdit.getText().toString().isEmpty()  || stockEdit.getText().toString().isEmpty()){
             Toast.makeText(this, "Los campos no pueden estar vacios", Toast.LENGTH_SHORT).show();
             return;
-        }*/
+        }
 
         if (path == null || path == ""){
-            Toast.makeText(this, "seleccionar una imagen", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Debe seleccionar una imagen", Toast.LENGTH_SHORT).show();
             return;
         }
         AsyncHttpClient client = new AsyncHttpClient();
@@ -169,7 +122,8 @@ public class Publicacion extends AppCompatActivity implements View.OnClickListen
         params.put("stock", stockEdit.getText());
         params.put("estado", estado);
         params.put("categoria", categoria);
-
+        params.put("name", name.getText());
+        params.put("vendedor", Data.ID_USER);
 
 
 
@@ -180,16 +134,16 @@ public class Publicacion extends AppCompatActivity implements View.OnClickListen
 
 
                     if (resp.getString("message") != null) {
-                        Toast.makeText(Publicacion.this, resp.getString("message"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(Publicando.this, resp.getString("message"), Toast.LENGTH_LONG).show();
                         path = "";
                         descripcionEdit.getText().clear();
                         precioEdit.getText().clear();
                         stockEdit.getText().clear();
 
-                        Publicacion.this.finish();
+                        Publicando.this.finish();
 
                     } else {
-                        Toast.makeText(Publicacion.this, "ERROR", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Publicando.this, "ERROR", Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -199,14 +153,14 @@ public class Publicacion extends AppCompatActivity implements View.OnClickListen
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Toast.makeText(Publicacion.this, responseString, Toast.LENGTH_LONG).show();
+                Toast.makeText(Publicando.this, responseString, Toast.LENGTH_LONG).show();
                 Log.d("message",responseString);
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 try {
-                    Toast.makeText(Publicacion.this, errorResponse.getString("error"), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Publicando.this, errorResponse.getString("error"), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -221,20 +175,20 @@ public class Publicacion extends AppCompatActivity implements View.OnClickListen
         if (v.getId() == R.id.btnPublicar){
             sendData();
         }
-        if (v.getId() == R.id.show_options_button){
+        if (v.getId() == R.id.btnCamera){
             Snackbar.make(v,"Message",Snackbar.LENGTH_LONG).show();
             cargarImagen();
         }
     }
-    //CAMERA
-    final int COD_GALERIA=100;
-    final int COD_CAMERA=200;
+    //DESDE AQUI VA LA PARTE DE LA FOTO
+    final int COD_GALERIA=10;
+    final int COD_CAMERA=20;
     String path;
 
     private void cargarImagen() {
 
         final CharSequence[] opciones={"Tomar Foto","Cargar Imagen","Cancelar"};
-        final AlertDialog.Builder alertOpciones=new AlertDialog.Builder(Publicacion.this);
+        final AlertDialog.Builder alertOpciones=new AlertDialog.Builder(Publicando.this);
         alertOpciones.setTitle("Seleccione una Opción");
         alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
@@ -284,7 +238,7 @@ public class Publicacion extends AppCompatActivity implements View.OnClickListen
                     Uri imgPath=data.getData();
                     imageView.setImageURI(imgPath);
                     path = Methods.getRealPathFromURI(this,imgPath);
-                    Toast.makeText(Publicacion.this, path, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Publicando.this, path, Toast.LENGTH_SHORT).show();
                     break;
                 case COD_CAMERA:
                     loadImageCamera();
@@ -302,4 +256,5 @@ public class Publicacion extends AppCompatActivity implements View.OnClickListen
 
         }
     }
+
 }

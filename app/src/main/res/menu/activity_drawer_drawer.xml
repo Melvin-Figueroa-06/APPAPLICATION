@@ -10,7 +10,7 @@
             android:title="@string/menu_home" />
 
         <item
-            android:id="@+id/publica"
+            android:id="@+id/publicado"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Publica un anuncio" />
         <item

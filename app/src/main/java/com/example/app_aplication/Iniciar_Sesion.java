@@ -184,31 +184,6 @@ public class Iniciar_Sesion extends AppCompatActivity implements View.OnClickLis
                 }
             }
 
-                /*try {
-                    if (response.getString("message") != null){
-                        Toast.makeText(Iniciar_Sesion.this, "Acceso Correcto", Toast.LENGTH_SHORT).show();
-                        Data.TOKEN = response.getString("token");
-                        Data.ID_USER = response.getString("idUser");
-                        Intent intent = new Intent(Iniciar_Sesion. this, DrawerActivity.class);
-                        startActivity(intent);
-               */         /*
-                        if (response.getString("tipo").equals("comprador")){
-                            Toast.makeText(Iniciar_Sesion.this, response.getString("tipo") + 1 , Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(Iniciar_Sesion.this, DrawerActivity.class);
-                            startActivity(intent);
-                        }else {
-                            Toast.makeText(Iniciar_Sesion.this, response.getString("tipo") + 2 , Toast.LENGTH_SHORT).show();
-
-                            Intent intent = new Intent(Iniciar_Sesion.this, Drawer2Activity.class);
-                            startActivity(intent);
-                        }
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }*/
-
-
             }
         });
 

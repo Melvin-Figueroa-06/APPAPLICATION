@@ -35,7 +35,6 @@ public class Citas extends AppCompatActivity {
 
                     //retreive nickname from EditText and add it to intent extra
                     i.putExtra(NICKNAME,nickname.getText().toString());
-
                     startActivity(i);
                 }
             }

@@ -2,4 +2,5 @@
 <resources>
     <string-array name="categoria" />
     <string-array name="estado" />
+    <string-array name="category" />
 </resources>

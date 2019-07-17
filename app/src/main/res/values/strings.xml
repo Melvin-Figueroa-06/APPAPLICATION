@@ -54,5 +54,13 @@
     <string name="title_activity_drawer">DrawerActivity</string>
     <string name="title_activity_registrandose">Registrandose</string>
     <string name="title_activity_drawer2">Drawer2Activity</string>
+    <string name="err_title" />
+    <string name="err_price" />
+    <string name="err_quantity" />
+    <string name="err_description" />
+    <string name="err_void_title" />
+    <string name="err_void_price" />
+    <string name="err_void_quantity" />
+    <string name="err_void_description" />
 
 </resources>

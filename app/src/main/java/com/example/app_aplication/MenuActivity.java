@@ -52,7 +52,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
             case R.id.publicacion:{
-                Intent actividad2 = new Intent(this, Publicacion.class);
+                Intent actividad2 = new Intent(this, Publicando.class);
                 actividad2.putExtra("msn","Vamos a la actividad 2");
                 startActivity(actividad2);
                 break;

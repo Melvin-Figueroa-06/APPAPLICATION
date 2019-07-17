@@ -24,6 +24,11 @@
         android:theme="@style/AppTheme">
 
         <activity
+            android:name=".PublicacionDetalles"
+            android:label="ProductDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
             android:name=".Registrandose"
             android:label="@string/title_activity_registrandose"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -41,12 +46,8 @@
             android:name=".Tabbed"
             android:label="@string/title_activity_tabbed"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Publicando">
-            android:name=".PostProduct"
-            android:label="PostProducto"
-            android:theme="@style/AppTheme.NoActionBar"
+        <activity android:name=".Publicando"/>
 
-        </activity>
         <activity
             android:name=".Ayuda"
             android:label="@string/title_activity_ayuda"
@@ -58,16 +59,10 @@
         <activity android:name=".Perfil" />
         <activity android:name=".Inicio" />
         <activity android:name=".Ajustes" />
-        <activity
-            android:name=".Publicacion"
-            android:label="@string/title_activity_publicacion"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".MenuActivity" />
-        <activity
-            android:name=".App"
-            android:label="@string/title_activity_app"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Registro" />
+
+
         <activity android:name=".Iniciar_Sesion" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

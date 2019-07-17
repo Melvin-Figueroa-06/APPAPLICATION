@@ -1,6 +1,5 @@
 package com.example.app_aplication;
 
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;

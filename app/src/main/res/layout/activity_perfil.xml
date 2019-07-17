@@ -6,20 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".Perfil">
 
-    <TextView
-        android:id="@+id/correoText"
-        android:layout_width="242dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="59dp"
-        android:text="Corrreo"
-        android:textAlignment="center"
-        android:textColor="#FF5722"
+
+    <ImageView
+        android:id="@+id/avatarImage"
+        android:layout_width="251dp"
+        android:layout_height="202dp"
+        android:layout_marginTop="26dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombreEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <EditText
         android:id="@+id/nombreEdit"
@@ -39,6 +35,21 @@
         app:layout_constraintTop_toBottomOf="@+id/avatarImage" />
 
     <TextView
+        android:id="@+id/correoText"
+        android:layout_width="242dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="59dp"
+        android:text="Corrreo"
+        android:textAlignment="center"
+        android:textColor="#FF5722"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nombreEdit" />
+
+    <TextView
         android:id="@+id/tipoText"
         android:layout_width="245dp"
         android:layout_height="41dp"
@@ -51,17 +62,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/correoText" />
-
-    <ImageView
-        android:id="@+id/avatarImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="57dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
-        app:srcCompat="@android:drawable/sym_def_app_icon" />
 
     <Button
         android:id="@+id/btnGuardar"
@@ -80,12 +80,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="57dp"
-        android:text="PERFIL DE USUARIO"
+        android:layout_marginBottom="26dp"
+        android:text="PERFIL"
         android:textColor="#FF5722"
-        android:textSize="24sp"
+        android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/avatarImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

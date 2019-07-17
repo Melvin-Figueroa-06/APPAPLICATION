@@ -113,7 +113,7 @@ public class DrawerActivity extends AppCompatActivity
                 break;
             }
             case R.id.favoritos:{
-                Intent favorito = new Intent(this, Favoritos.class);
+                Intent favorito = new Intent(this, PublicacionDetalles.class);
                 startActivity(favorito);
                 break;
             }
